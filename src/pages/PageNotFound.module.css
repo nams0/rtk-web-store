@@ -1,0 +1,38 @@
+.container {
+  min-height: 520px;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.notfound {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6a6a6a;
+}
+
+.notfound h1 {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  /* font-size: 4rem; */
+  text-shadow: 1px 1px 8px #6a6a6a;
+}
+
+.notfound svg {
+    font-size: 12rem;
+    filter: drop-shadow(1px 1px 8px #6a6a6a);
+}
+
+.container a {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #fe5d42;
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.container a:hover {
+  background-color: #e2e2e2;
+  color: #fe5d42;
+}
