@@ -1,3 +1,12 @@
+import { useDispatch, useSelector } from "react-redux"
+
+import {
+  addItem,
+  decrease,
+  increase,
+  removeItem,
+} from "../features/cart/cartSlice"
+
 import { Link } from "react-router-dom"
 
 import { TbListDetails } from "react-icons/tb"
@@ -6,21 +15,16 @@ import { MdDeleteOutline } from "react-icons/md"
 import { FiMinus, FiPlus } from "react-icons/fi"
 
 import { productQuantity, shortenText } from "../helpers/helper"
-// import { useCart } from "../context/CartProvider"
 
 import styles from "./Card.module.css"
 
 function Card({ data }) {
   const { id, title, image, price } = data
 
-  // const [state, dispatch] = useCart()
+  const store = useSelector((store) => store.cart)
+  const dispatch = useDispatch()
 
-  // const quantity = productQuantity(state, id)
-  const quantity = 0
-
-  const clickHandler = (type) => {
-    // dispatch({ type, payload: data })
-  }
+  const quantity = productQuantity(store, id)
 
   return (
     <div className={styles.card}>
@@ -33,13 +37,13 @@ function Card({ data }) {
         </Link>
         <div>
           {quantity === 1 && (
-            <button onClick={() => clickHandler("REMOVE_ITEM")}>
+            <button onClick={() => dispatch(removeItem(data))}>
               <MdDeleteOutline />
             </button>
           )}
 
           {quantity >= 2 && (
-            <button onClick={() => clickHandler("DECREASE")}>
+            <button onClick={() => dispatch(decrease(data))}>
               <FiMinus />
             </button>
           )}
@@ -47,11 +51,11 @@ function Card({ data }) {
           <span>{!!quantity && quantity}</span>
 
           {quantity === 0 ? (
-            <button onClick={() => clickHandler("ADD_ITEM")}>
+            <button onClick={() => dispatch(addItem(data))}>
               <TbShoppingBagCheck />
             </button>
           ) : (
-            <button onClick={() => clickHandler("INCREASE")}>
+            <button onClick={() => dispatch(increase(data))}>
               <FiPlus />
             </button>
           )}

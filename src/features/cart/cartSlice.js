@@ -33,16 +33,16 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload.id
       )
       state.selectedItems[increaseIndex].quantity++
-      state.totalPrice = sumPrice(newSelectedItems)
-      state.itemsCouter = sumQuantity(newSelectedItems)
+      state.totalPrice = sumPrice(state.selectedItems)
+      state.itemsCouter = sumQuantity(state.selectedItems)
     },
     decrease: (state, action) => {
       const decreaseIndex = state.selectedItems.findIndex(
         (item) => item.id === action.payload.id
       )
       state.selectedItems[decreaseIndex].quantity--
-      state.totalPrice = sumPrice(newSelectedItems)
-      state.itemsCouter = sumQuantity(newSelectedItems)
+      state.totalPrice = sumPrice(state.selectedItems)
+      state.itemsCouter = sumQuantity(state.selectedItems)
     },
     checkout: (state) => {
       state.selectedItems = []
