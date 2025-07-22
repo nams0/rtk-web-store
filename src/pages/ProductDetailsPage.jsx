@@ -1,8 +1,10 @@
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+
 import { Link, useParams } from "react-router-dom"
 
-import { useProductsDetails } from "../context/ProductProvider"
-
 import Loader from "../components/Loader"
+import { fetchProducts } from "../features/product/productsSlice"
 
 import { SiOpenproject } from "react-icons/si"
 import { IoMdPricetag } from "react-icons/io"
@@ -12,7 +14,15 @@ import styles from "./ProductDetailsPage.module.css"
 
 function ProductDetailsPage() {
   const { id } = useParams()
-  const productDetails = useProductsDetails(+id)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
+
+  const productDetails = useSelector((store) =>
+    store.products.products.find((product) => product.id === +id)
+  )
 
   if (!productDetails) return <Loader />
 
