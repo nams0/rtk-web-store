@@ -6,19 +6,20 @@ import { MdDeleteOutline } from "react-icons/md"
 import { FiMinus, FiPlus } from "react-icons/fi"
 
 import { productQuantity, shortenText } from "../helpers/helper"
-import { useCart } from "../context/CartProvider"
+// import { useCart } from "../context/CartProvider"
 
 import styles from "./Card.module.css"
 
 function Card({ data }) {
   const { id, title, image, price } = data
 
-  const [state, dispatch] = useCart()
+  // const [state, dispatch] = useCart()
 
-  const quantity = productQuantity(state, id)
+  // const quantity = productQuantity(state, id)
+  const quantity = 0
 
   const clickHandler = (type) => {
-    dispatch({ type, payload: data })
+    // dispatch({ type, payload: data })
   }
 
   return (

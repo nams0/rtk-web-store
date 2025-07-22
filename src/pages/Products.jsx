@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 
 import Card from "../components/Card"
 import Loader from "../components/Loader"
-import { useProducts } from "../context/ProductProvider"
+import { fetchProducts } from "../features/product/productsSlice"
+
 import {
   categoriseProducts,
   getInitialQuery,
@@ -20,7 +22,12 @@ function Products() {
   const [displayed, setDisplayed] = useState([])
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const products = useProducts() //this is state from ProductProvider and on change ProductProvider will rerender then children components will rerender too
+  const { products, loading } = useSelector((store) => store.products)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
 
   useEffect(() => {
     setDisplayed(products)
@@ -44,7 +51,7 @@ function Products() {
 
       <div className={styles.container}>
         <div className={styles.products}>
-          {!displayed.length && <Loader />}
+          {loading && <Loader />}
           {displayed.map((product) => (
             <Card key={product.id} data={product} />
           ))}

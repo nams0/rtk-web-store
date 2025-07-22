@@ -4,15 +4,15 @@ import PageNotFound from "./pages/PageNotFound"
 import Products from "./pages/Products"
 import ProductDetailsPage from "./pages/ProductDetailsPage"
 import CheckoutPage from "./pages/CheckoutPage"
-import ProductProvider from "./context/ProductProvider"
-import CartProvider from "./context/CartProvider"
+// import ProductProvider from "./context/ProductProvider"
+// import CartProvider from "./context/CartProvider"
 import Layout from "./layout/Layout"
 
 function App() {
   return (
     <div>
-      <CartProvider>
-        <ProductProvider>
+      {/* <CartProvider> */}
+        {/* <ProductProvider> */}
           <Layout>
             <Routes>
               <Route index element={<Navigate to="/products" replace />} />
@@ -22,8 +22,8 @@ function App() {
               <Route path="/checkout" element={<CheckoutPage />} />
             </Routes>
           </Layout>
-        </ProductProvider>
-      </CartProvider>
+        {/* </ProductProvider> */}
+      {/* </CartProvider> */}
     </div>
   )
 }
