@@ -6,13 +6,19 @@ import "./global.css"
 import App from "./App.jsx"
 import store from "./app/store.js"
 
+import { persistor } from "./app/store.js"
+
+import { PersistGate } from "redux-persist/integration/react"
+
 import { Provider } from "react-redux"
 
 createRoot(document.getElementById("root")).render(
   // <StrictMode>
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </BrowserRouter>
   // </StrictMode>
