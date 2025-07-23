@@ -3,7 +3,7 @@ import { sumPrice, sumQuantity } from "../../helpers/helper"
 
 const initialState = {
   selectedItems: [],
-  itemsCouter: 0,
+  itemsCounter: 0,
   totalPrice: 0,
   checkout: false,
 }
@@ -16,7 +16,7 @@ const cartSlice = createSlice({
       if (!state.selectedItems.find((item) => item.id === action.payload.id)) {
         state.selectedItems.push({ ...action.payload, quantity: 1 })
         state.totalPrice = sumPrice(state.selectedItems)
-        state.itemsCouter = sumQuantity(state.selectedItems)
+        state.itemsCounter = sumQuantity(state.selectedItems)
         state.checkout = false
       }
     },
@@ -26,7 +26,7 @@ const cartSlice = createSlice({
       )
       state.selectedItems = newSelectedItems
       state.totalPrice = sumPrice(newSelectedItems)
-      state.itemsCouter = sumQuantity(newSelectedItems)
+      state.itemsCounter = sumQuantity(newSelectedItems)
     },
     increase: (state, action) => {
       const increaseIndex = state.selectedItems.findIndex(
@@ -34,7 +34,7 @@ const cartSlice = createSlice({
       )
       state.selectedItems[increaseIndex].quantity++
       state.totalPrice = sumPrice(state.selectedItems)
-      state.itemsCouter = sumQuantity(state.selectedItems)
+      state.itemsCounter = sumQuantity(state.selectedItems)
     },
     decrease: (state, action) => {
       const decreaseIndex = state.selectedItems.findIndex(
@@ -42,12 +42,12 @@ const cartSlice = createSlice({
       )
       state.selectedItems[decreaseIndex].quantity--
       state.totalPrice = sumPrice(state.selectedItems)
-      state.itemsCouter = sumQuantity(state.selectedItems)
+      state.itemsCounter = sumQuantity(state.selectedItems)
     },
     checkout: (state) => {
       state.selectedItems = []
       state.totalPrice = 0
-      state.itemsCouter = 0
+      state.itemsCounter = 0
       state.checkout = true
     },
   },

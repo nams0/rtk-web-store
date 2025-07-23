@@ -2,30 +2,32 @@ import BasketCard from "../components/BasketCard"
 import BasketSidebar from "../components/BasketSidebar"
 import { MdRemoveShoppingCart } from "react-icons/md"
 
-// import { useCart } from "../context/CartProvider"
+import { useSelector } from "react-redux"
 
 import styles from "./CheckoutPage.module.css"
 
 function CheckoutPage() {
-  // const [state, dispatch] = useCart()
-  // if (!state.itemsCounter)
-  //   return (
-  //     <div className={styles.emptycontainer}>
-  //       <div className={styles.empty}>
-  //         <h1>Cart is empty !</h1>
-  //         <MdRemoveShoppingCart />
-  //       </div>
-  //     </div>
-  //   )
+  const store = useSelector((store) => store.cart)
+  console.log(store)
+
+  if (!store.itemsCounter)
+    return (
+      <div className={styles.emptycontainer}>
+        <div className={styles.empty}>
+          <h1>Cart is empty !</h1>
+          <MdRemoveShoppingCart />
+        </div>
+      </div>
+    )
 
   return (
     <div className={styles.container}>
-      {/* <BasketSidebar state={state} dispatch={dispatch} />
+      <BasketSidebar store={store} />
       <div className={styles.products}>
-        {state.selectedItems.map((product) => (
-          <BasketCard key={product.id} product={product} dispatch={dispatch} />
+        {store.selectedItems.map((product) => (
+          <BasketCard key={product.id} product={product} />
         ))}
-      </div> */}
+      </div>
     </div>
   )
 }

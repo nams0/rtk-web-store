@@ -1,3 +1,6 @@
+import { useDispatch } from "react-redux"
+import { decrease, increase, removeItem } from "../features/cart/cartSlice"
+
 import { MdDeleteOutline } from "react-icons/md"
 import { FiMinus, FiPlus } from "react-icons/fi"
 
@@ -5,12 +8,9 @@ import { shortenText } from "../helpers/helper"
 
 import styls from "./BasketCard.module.css"
 
-function BasketCard({ product, dispatch }) {
+function BasketCard({ product }) {
   const { title, image, quantity, description } = product
-
-  const clickHandler = (type) => {
-    dispatch({ type, payload: product })
-  }
+  const dispatch = useDispatch()
 
   return (
     <div className={styls.card}>
@@ -19,18 +19,18 @@ function BasketCard({ product, dispatch }) {
       <p>{shortenText(description)}</p>
       <div className={styls.actions}>
         {quantity === 1 ? (
-          <button onClick={() => clickHandler("REMOVE_ITEM")}>
+          <button onClick={() => dispatch(removeItem(product))}>
             <MdDeleteOutline />
           </button>
         ) : (
-          <button onClick={() => clickHandler("DECREASE")}>
+          <button onClick={() => dispatch(decrease(product))}>
             <FiMinus />
           </button>
         )}
 
         <span>{quantity}</span>
 
-        <button onClick={() => clickHandler("INCREASE")}>
+        <button onClick={() => dispatch(increase(product))}>
           <FiPlus />
         </button>
       </div>

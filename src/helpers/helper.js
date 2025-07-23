@@ -40,13 +40,13 @@ const getInitialQuery = (searchParams) => {
 }
 
 const sumPrice = (products) => {
-  return products.reduce((acc, current) => acc + current.quantity, 0)
-}
-
-const sumQuantity = (products) => {
   return products
     .reduce((acc, current) => acc + current.price * current.quantity, 0)
     .toFixed(2)
+}
+
+const sumQuantity = (products) => {
+  return products.reduce((acc, current) => acc + current.quantity, 0)
 }
 
 const productQuantity = (state, id) => {
