@@ -81,13 +81,13 @@ Cart and app state are stored in `localStorage` using `redux-persist`. This ensu
 ## 🧭 Redux Flow Overview
 
 ```mermaid
-graph TD
-    A[UI Components] -->|Dispatch| B[Redux Actions]
-    B --> C[Redux Slices (Reducers)]
-    C --> D[Redux Store]
-    D -->|Persist| E[(localStorage via redux-persist)]
-    D -->|Hydrate| A
-    C -->|Selectors| A
+flowchart TD
+    A["UI Components"] -- Dispatch --> B("Redux Actions")
+    B --> C["Redux Slices"]
+    C --> D["Store"]
+    D -- Persist --> E[("localStorage")]
+    D -- Hydrate --> A
+    C -- Selectors --> A
 ```
 
 ---
